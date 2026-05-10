@@ -51,7 +51,6 @@ export default async function FestivalPage({ params }: { params: { slug: string 
       minHeight: '100vh', background: '#060608',
       color: '#b8b8cc', fontFamily: 'system-ui, sans-serif',
     }}>
-
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
         height: 56, display: 'flex', alignItems: 'center',
@@ -99,13 +98,12 @@ export default async function FestivalPage({ params }: { params: { slug: string 
           }}>{festival.name}</h1>
           <div style={{ display: 'flex', gap: 20, fontSize: '0.82rem', color: '#8888a4', flexWrap: 'wrap' }}>
             <span>📍 {festival.venue}, {festival.city}</span>
-            <span>📅 {new Date(festival.date_start).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })} – {new Date(festival.date_end).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
             <span>👥 {participations?.length ?? 0} PokerMates</span>
           </div>
         </div>
       </div>
 
-      <div style={{ padding: '40px', maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 340px', gap: 32 }}>
+      <div style={{ padding: '40px', maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 320px', gap: 32 }}>
 
         <div>
           <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#f8f4ee', marginBottom: 20 }}>
@@ -128,7 +126,7 @@ export default async function FestivalPage({ params }: { params: { slug: string 
                     {new Date(t.start_date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
                   </div>
                 </div>
-                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#c4983a', textAlign: 'right', flexShrink: 0 }}>
+                <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#c4983a', flexShrink: 0 }}>
                   {(t.buyin_cents / 100).toLocaleString('fr-FR')}€
                 </div>
               </div>
@@ -139,7 +137,7 @@ export default async function FestivalPage({ params }: { params: { slug: string 
             <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#f8f4ee', marginBottom: 20 }}>
               PokerMates inscrits ({participations?.length ?? 0})
             </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: 12 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 12 }}>
               {participations?.map((p: any) => (
                 <div key={p.id} style={{
                   background: '#141418', border: '1px solid #2e2e3a',
@@ -155,11 +153,6 @@ export default async function FestivalPage({ params }: { params: { slug: string 
                     {p.profile?.pseudo}
                   </div>
                   <div style={{ fontSize: '0.7rem', color: '#8888a4' }}>{p.profile?.city}</div>
-                  <div style={{
-                    marginTop: 8, fontSize: '0.62rem', fontWeight: 700,
-                    color: '#c4983a', background: 'rgba(196,154,60,0.1)',
-                    padding: '3px 8px', borderRadius: 999, display: 'inline-block',
-                  }}>{p.profile?.level}</div>
                 </div>
               ))}
             </div>
@@ -169,15 +162,12 @@ export default async function FestivalPage({ params }: { params: { slug: string 
         <div>
           <div style={{
             background: '#141418', border: '1px solid #2e2e3a',
-            borderRadius: 12, padding: 24, marginBottom: 16,
+            borderRadius: 12, padding: 24, position: 'sticky', top: 72,
           }}>
-            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8f4ee', marginBottom: 16 }}>
-              Infos clés
-            </h3>
+            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#f8f4ee', marginBottom: 16 }}>Infos clés</h3>
             {[
               { k: 'Dates', v: `${new Date(festival.date_start).toLocaleDateString('fr-FR')} – ${new Date(festival.date_end).toLocaleDateString('fr-FR')}` },
               { k: 'Lieu', v: `${festival.venue}, ${festival.city}` },
-              { k: 'Circuit', v: festival.circuit },
               { k: 'Main Event', v: festival.buyin_main ? `${(festival.buyin_main / 100).toLocaleString('fr-FR')}€` : 'N/A' },
               { k: 'Buy-in min', v: festival.buyin_min ? `${(festival.buyin_min / 100).toLocaleString('fr-FR')}€` : 'N/A' },
             ].map(item => (
@@ -195,17 +185,8 @@ export default async function FestivalPage({ params }: { params: { slug: string 
               fontSize: '0.82rem', fontWeight: 800, letterSpacing: '0.04em',
               textTransform: 'uppercase', textDecoration: 'none',
               textAlign: 'center', marginTop: 20,
-            }}>♠ Je participe à ce festival</a>
+            }}>♠ Je participe</a>
           </div>
-
-          {festival.website_url && (
-            <a href={festival.website_url} target="_blank" style={{
-              display: 'block', width: '100%', padding: '11px',
-              background: 'transparent', border: '1px solid #2e2e3a',
-              borderRadius: 4, color: '#b8b8cc', fontSize: '0.78rem',
-              fontWeight: 600, textDecoration: 'none', textAlign: 'center',
-            }}>Site officiel →</a>
-          )}
         </div>
 
       </div>
